@@ -9,7 +9,7 @@ const CategoryItem = ({ category }) => {
       }}/>
       <div className="info">
         <h2>{title}</h2>
-        <p>Shop Now</p>
+        <p>shop now</p>
       </div>
     </div>
   );
