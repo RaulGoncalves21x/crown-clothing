@@ -5,14 +5,13 @@ import { getCategoriesAndDocuments } from "../utils/firebase/firebase.utils";
 import SHOP_DATA from "../shop-data.js";*/
 
 // as the actual value you want to access
-export const ProductsContext = createContext({
-  availableProducts: [],
-  setAvailableProducts: () => []
+export const CategoriesContext = createContext({
+  categoriesMap: {}
 });
 
-export const ProductsProvider = ({ children }) => {
-  const [availableProducts, setAvailableProducts] = useState([]);
-  const value = { availableProducts, setAvailableProducts };
+export const CategoriesProvider = ({ children }) => {
+  const [categoriesMap, setCategoriesMap] = useState({});
+  const value = { categoriesMap };
 
   /*useEffect(() => {
     addCollectionAndDocuments("categories", SHOP_DATA);
@@ -21,12 +20,12 @@ export const ProductsProvider = ({ children }) => {
   useEffect(() => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCategoriesAndDocuments("categories");
-      console.log(categoryMap);
+      setCategoriesMap(categoryMap);
     };
     getCategoriesMap();
   }, []);
 
   return (
-    <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>
+    <CategoriesContext.Provider value={value}>{children}</CategoriesContext.Provider>
   );
 };
