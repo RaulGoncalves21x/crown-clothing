@@ -14,14 +14,14 @@ const CategoryPage = () => {
   const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
-    setProducts(categoriesMap[category]);
+    setProducts(categoriesMap[category])
   }, [category, categoriesMap]);
 
   const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1,);
   };
 
-  if (categoriesMap[category]) {
+  if (products) {
     return (
       <>
         <Title>{category.toUpperCase()}</Title>
@@ -44,7 +44,7 @@ const CategoryPage = () => {
           <h2>You can try these categories:</h2>
           <div>
             {Object.keys(categoriesMap).map((categoryTitle) => (
-                <a href={`/shop/${categoryTitle}`}>{capitalize(categoryTitle)}</a>
+                <a key={categoryTitle} href={`/shop/${categoryTitle}`}>{capitalize(categoryTitle)}</a>
             ))}
           </div>
         </SuggestionsDiv>
