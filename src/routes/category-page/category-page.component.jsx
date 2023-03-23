@@ -5,12 +5,14 @@ import { CategoryContainer, Title, ErrorDiv, SuggestionsDiv } from './category-p
 import { useParams } from "react-router-dom";
 import ProductCard from "../../components/product-card/product-card.component";
 import { useSelector } from 'react-redux';
-import { selectCategoriesMap } from '../../store/categories/category.selector';
+import { selectCategoriesIsLoading, selectCategoriesMap } from '../../store/categories/category.selector';
+import Spinner from "../../components/spinner/spinner.component";
 
 const CategoryPage = () => {
   const { category } = useParams();
   /* const { categoriesMap } = useContext(CategoriesContext); */
   const categoriesMap = useSelector(selectCategoriesMap);
+  const isLoading = useSelector(selectCategoriesIsLoading);
   const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
@@ -21,19 +23,23 @@ const CategoryPage = () => {
     return string.charAt(0).toUpperCase() + string.slice(1,);
   };
 
-  if (products) {
-    return (
-      <>
-        <Title>{category.toUpperCase()}</Title>
-        <CategoryContainer>
-          {products &&
-            products.map(product => <ProductCard key={product.id} product={product} />)
-          }
-        </CategoryContainer>
-      </>
-    )
-  } else {
-    return (
+  return (
+    <>
+      {isLoading ? (
+        <Spinner /> 
+      ) : (
+        <>
+          <Title>{category.toUpperCase()}</Title>
+          <CategoryContainer>
+            {products &&
+              products.map(product => <ProductCard key={product.id} product={product} />)
+            }
+          </CategoryContainer>
+        </>
+      )}
+    </>
+  );
+/*  return (
       <>
         <ErrorDiv>
           <h1>Oops!</h1>
@@ -49,8 +55,7 @@ const CategoryPage = () => {
           </div>
         </SuggestionsDiv>
       </>
-    )
-  }
+    ); */
 };
 
 export default CategoryPage;
