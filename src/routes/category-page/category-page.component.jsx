@@ -28,19 +28,39 @@ const CategoryPage = () => {
       {isLoading ? (
         <Spinner /> 
       ) : (
-        <>
-          <Title>{category.toUpperCase()}</Title>
-          <CategoryContainer>
-            {products &&
-              products.map(product => <ProductCard key={product.id} product={product} />)
-            }
-          </CategoryContainer>
-        </>
+        (products) ? (
+          <>
+            <Title>{category.toUpperCase()}</Title>
+            <CategoryContainer>
+              {products &&
+                products.map(product => <ProductCard key={product.id} product={product} />)
+              }
+            </CategoryContainer>
+          </>
+        ) : (
+          <>
+            <ErrorDiv>
+              <h1>Oops!</h1>
+              <p>It looks like the category you are searching for isn't available.</p>
+              <p>Try again, with a different category.</p>
+            </ErrorDiv>
+            <SuggestionsDiv>
+              <h2>You can try these categories:</h2>
+              <div>
+                {Object.keys(categoriesMap).map((categoryTitle) => (
+                    <a key={categoryTitle} href={`/shop/${categoryTitle}`}>{capitalize(categoryTitle)}</a>
+                ))}
+              </div>
+            </SuggestionsDiv>
+          </>
+        )
       )}
     </>
   );
+
 /*  return (
       <>
+        {}
         <ErrorDiv>
           <h1>Oops!</h1>
           <p>It looks like the category you are searching for isn't available.</p>
