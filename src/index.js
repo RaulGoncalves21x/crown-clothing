@@ -10,13 +10,12 @@ import App from './App';
 import { persistor, store } from './store/store';
 import reportWebVitals from './reportWebVitals';
 import { PersistGate } from 'redux-persist/integration/react';
-import Spinner from 'react-bootstrap/Spinner';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={<Spinner animation="grow" />} persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           {/* <UserProvider> */}
           {/* <CategoriesProvider> */}
