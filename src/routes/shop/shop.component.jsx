@@ -18,7 +18,12 @@ const Shop = () => {
     getCategoriesMap();
   }); */
 
-  // With Redux
+  // With Redux-Thunk
+  /* useEffect(() => {
+    dispatch(fetchCategoriesAsync());
+  }); */
+
+  // With Redux-Saga
   useEffect(() => {
     dispatch(fetchCategoriesStart());
   });
