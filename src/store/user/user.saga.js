@@ -64,6 +64,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
 
 export function* signInAfterSignUp({ payload: { user, additionalDetails } }) {
   yield call(getSnapshotFromUserAuth, user, additionalDetails);
+  yield window.location.reload(true);
 };
 
 export function* signUp({ payload: { email, password, displayName } }) {
